@@ -1,0 +1,77 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    mysql-datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://ooo.com:3306/databaseName?useUnicode=true&characterEncoding=utf-8
+      username: account
+      password: password
+    telegram-datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306?useUnicode=true&characterEncoding=utf-8
+      username: account
+      password: password
+    mssql-dsabc:
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      jdbc-url: jdbc:sqlserver://192.168.0.111:12345;
+      username: account
+      password: password
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      # https://github.com/brettwooldridge/HikariCP
+      pool-name: OGHikariConnectionPool #連線池名稱
+      connection-timeout: 30000 #等待連線池分配的時間，預設 30 秒
+      minimum-idle: 10 #最小閒置時間，預設 10 毫秒
+      maximum-pool-size: 10 #連線池最大連線數, 公式：核心數 * 2  + 硬碟數
+      idle-timeout: 600000 #連線閒置時間，超過就釋放，預設 10分鐘
+      read-only: false #如果只有讀，可設為 true，保證安全，預設 false
+
+telegram-bot:
+  token: 850824662:AAHvBfsJNyL0wIhHKUbQxuNteH4eHRBa5PY
+  chat-id: -321193089
+  username: fsadBot
+
+# 相關表的創建，看 quartz-2.x.x\docs\dbTables
+#  quartz:
+#    properties:
+#      job-store-type: jdbc
+#      org:
+#        quartz:
+#          scheduler:
+#            instanceName: og-clusteredScheduler
+#            instanceId: AUTO
+#          jobStore:
+#            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+#            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+#            tablePrefix: QRTZ_
+#            isClustered: false # 是否開啟叢集(集群)
+#            clusterCheckinInterval: 10000
+#            useProperties: false
+#            dataSource: ogquartz-datasource
+#          threadPool:
+#            class: org.quartz.simpl.SimpleThreadPool
+#            threadCount: 10
+#            threadPriority: 5
+#            threadsInheritContextClassLoaderOfInitializingThread: true
+#          dataSource:
+#            ogquartz-datasource:
+#              driver: com.mysql.cj.jdbc.Driver
+#              URL: jdbc:mysql://localhost:3306/og_quartz?useUnicode=true&characterEncoding=utf-8
+#              user: root
+#              password: link123
+#              provider:
+#                hikaricp # 預設為 c3p0
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true #預設 true
+  global-config:
+    db-config:
+      table-underline: true #預設 true
+      id-type: auto #預設 ID_WORKER(全局唯一ID)
+
+logging:
+  level:
+    root: info

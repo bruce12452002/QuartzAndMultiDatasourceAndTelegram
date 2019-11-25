@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>og_schedule</title>
+
+    <style>
+        input {
+            font-size: 50px;
+            width: 150px;
+            height: 80px;
+        }
+    </style>
+
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script>
+        function press() {
+            let value = document.querySelector("#execute").value;
+            if (value == "Go") {
+                loadJob();
+            } else if (value == "Stop") {
+                pauseJob();
+            }
+        }
+
+        function loadJob() {
+            document.querySelector("#execute").value = "Stop";
+            $.get("/schedule/loadJob");
+        }
+
+        function pauseJob() {
+            document.querySelector("#execute").value = "Go";
+            $.get("/schedule/pauseJob");
+        }
+    </script>
+</head>
+<body>
+    <input id="execute" type="button" value="Go" onclick="press();"/>
+</body>
+</html>

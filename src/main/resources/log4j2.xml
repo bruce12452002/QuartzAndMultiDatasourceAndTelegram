@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="trace" strict="true" name="LogConfig">
+    <Properties>
+        <Property name="filepath">D:/log/log4j2</Property>
+        <Property name="outputFormat">[%d{DATE}] - [%c] - [%highlight{%level}] - [%method] - [%t] - [%T]- %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>${outputFormat}</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="LogService"
+                     fileName="${filepath}/curryHour.html"
+                     filePattern="${filepath}/Log$${date:yyyyMMddHH}/$${date:yyyyMMddHHmmss}%i.html"
+                     append="true">
+
+            <OgHtmlLayout title="MyTitle">
+                <Pattern>${outputFormat}</Pattern>
+            </OgHtmlLayout>
+            <Policies>
+                <CronTriggeringPolicy schedule="0 0 * * * ?"/>
+            </Policies>
+            <DefaultRolloverStrategy max="2000"/> <!-- same folder file count -->
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="fileLogger" level="info" additivity="false">
+            <AppenderRef ref="LogService"/>
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+
+        <Root level="trace">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,6 @@
+[
+  {"JobClassName":"Abc","Side":"Post","Freq":"15","Period":"7", "Enable": "true"},
+  {"JobClassName":"Abc","Side":"Pre","Freq":"15","Period":"7", "Enable": "true"},
+  {"JobClassName":"Def","Side":"Pre","Freq":"30","Period":"10", "Enable": "true"},
+  {"JobClassName":"Ghi","Side":"Pre","Freq":"30","Period":"60", "Enable": "true"}
+]
